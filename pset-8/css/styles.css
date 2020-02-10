@@ -32,23 +32,17 @@ h2 {
 
 }
 
-
-
 .column {
   height: 100%;
   width: 100%;
   flex-direction: column;
 }
 
-
-
 .wrap {
   flex-wrap: wrap;
   height: 456px;
   width: 456px;
 }
-
-
 
 .square {
   border: 1px solid rgba(0, 0, 0, 0.75);
@@ -59,14 +53,10 @@ h2 {
   width: 150px;
 }
 
-
-
 .square:hover {
   background-color:#1C3341;
   cursor: pointer;
 }
-
-
 
 #reset-button {
   background-color: #DEDBD7;
@@ -78,8 +68,6 @@ h2 {
   text-align: center;
   width: 456px;
 }
-
-
 
 #reset-button:hover {
   background-color: #5A7684;
