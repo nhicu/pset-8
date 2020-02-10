@@ -29,8 +29,7 @@ function init() {
   board = [
     "", "", "",
     "", "", "",
-    "", "", ""
-  ];
+    
   turn = "X";
   win = null;
 
