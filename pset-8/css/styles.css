@@ -47,10 +47,3 @@ h2 {
   background-color: lightgray;
   cursor: pointer;
 }
-
-
-#reset-button:hover {
-  background-color: black;
-  color: white;
-  cursor: pointer;
-}
