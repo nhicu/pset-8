@@ -1,4 +1,4 @@
-/////////////////// CONSTANTS /////////////////////////////////////
+///////////////////// CONSTANTS /////////////////////////////////////
 const winningConditions = [
   [0, 1, 2],
   [3, 4, 5],
@@ -8,12 +8,13 @@ const winningConditions = [
   [2, 5, 8],
   [0, 4, 8],
   [2, 4, 6]
-];
-
+]
 ///////////////////// APP STATE (VARIABLES) /////////////////////////
 let board;
 let turn;
 let win;
+let keepScoreX = 0;
+let keepScoreO = 0;
 
 ///////////////////// CACHED ELEMENT REFERENCES /////////////////////
 const squares = Array.from(document.querySelectorAll("#board div"));
@@ -23,17 +24,30 @@ const message = document.querySelector("h2");
 window.onload = init;
 document.getElementById("board").onclick = takeTurn;
 document.getElementById("reset-button").onclick = init;
+document.getElementById('ButtonX').onclick = firstX;
+document.getElementById('ButtonO').onclick = firstO;
 
 ///////////////////// FUNCTIONS /////////////////////////////////////
 function init() {
   board = [
     "", "", "",
     "", "", "",
-    
+    "", "", ""
+  ];
   turn = "X";
   win = null;
 
   render();
+}
+
+function firstX() {
+  document.getElementById('turnButton').innerHTML = "Turn: X";
+  turn = "X";
+}
+
+function firstO() {
+  document.getElementById('turnButton').innerHTML = "Turn: O";
+  turn = "O";
 }
 
 function render() {
@@ -43,32 +57,6 @@ function render() {
 
   message.textContent =
     win === "T" ? "It's a tie!" : win ? `${win} wins!` : `Turn: ${turn}`;
-}
-
-function takeTurn(e) {
-  let index = squares.findIndex(function(square) {
-    return square === e.target;
-  });
-  board[index] = turn;
-  turn = turn === "X" ? "O" : "X";
-
-  render();
-}
-
-function getWinner() {
-  let winner = null;
-
-  winningConditions.forEach(function(condition, index) {
-    if (
-      board[condition[0]] &&
-      board[condition[0]] === board[condition[1]] &&
-      board[conition[1]] === board[condition[2]]
-    ) {
-      winner = board[condition[0]];
-    }
-  });
-
-  return winner;
 }
 
 function takeTurn(e) {
@@ -100,31 +88,13 @@ function getWinner() {
     }
   });
 
-  return winner ? winner : board.includes("") ? null : "T";
-}
-
-function keepScore() {
-  if (win === !"T") {
-    if (win === "X") {
-      const countx = document.getElementById("x-score");
-
-    }
+  if (winner === "X") {
+    keepScoreX++;
+    document.getElementById('ScoreX').innerHTML = keepScoreX;
+  } else if (winner === "O") {
+    keepScoreO++;
+    document.getElementById('ScoreO').innerHTML = keepScoreO;
   }
-}
 
-function firstTurn() {
-    const whoIsFirst = document.getElementById("whosFirst");
-
-    var first = whoIsFirst.toLowerCase();
-
-    switch (first) {
-      case x:
-        turn = "X";
-        break;
-      case o:
-        turn = "O";
-        break;
-      default:
-        alert("Type in X or O to decide who goes first!");
-    }
+  return winner ? winner : board.includes("") ? null : "T";
 }
